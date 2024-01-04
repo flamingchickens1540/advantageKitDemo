@@ -72,7 +72,8 @@ public final class Constants {
     public static final class ElevatorConstants {
         public static final double GEAR_RATIO = 4.21;
         public static final double DRUM_RADIUS_METERS = Units.inchesToMeters(0.75);
-        public static final double MAX_HEIGHT_METERS = Units.inchesToMeters(86);
+        public static final double MAX_HEIGHT_METERS = Units.inchesToMeters(70);
+        public static final double STAGE_1_HEIGHT_METERS = Units.inchesToMeters(38);
         public static final double CARRIAGE_MASS_KG = 20;
 
         public static final double KP = 1;

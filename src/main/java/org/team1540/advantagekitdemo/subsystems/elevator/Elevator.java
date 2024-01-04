@@ -3,6 +3,7 @@ package org.team1540.advantagekitdemo.subsystems.elevator;
 import edu.wpi.first.math.controller.ElevatorFeedforward;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj2.command.ProfiledPIDSubsystem;
 import org.littletonrobotics.junction.Logger;
 
@@ -38,6 +39,23 @@ public class Elevator extends ProfiledPIDSubsystem {
     public void setPosition(double positionMeters) {
         enable();
         setGoal(positionMeters);
+    }
+
+    public void stop() {
+        if (RobotState.isDisabled()) setVoltage(0);
+        else setPosition(getPositionMeters());
+    }
+
+    public double getPositionMeters() {
+        return getMeasurement();
+    }
+
+    public double getSetpoint() {
+        return getController().getGoal().position;
+    }
+
+    public double getProfilePosition() {
+        return getController().getSetpoint().position;
     }
 
     @Override

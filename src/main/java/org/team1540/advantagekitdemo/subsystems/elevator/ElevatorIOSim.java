@@ -14,7 +14,7 @@ public class ElevatorIOSim implements ElevatorIO {
                     CARRIAGE_MASS_KG,
                     DRUM_RADIUS_METERS,
                     0,
-                    MAX_HEIGHT_METERS/2, // divide by 2 due to cascade rigging
+                    MAX_HEIGHT_METERS,
                     true,
                     0,
                     null
@@ -25,9 +25,11 @@ public class ElevatorIOSim implements ElevatorIO {
     @Override
     public void updateInputs(ElevatorIOInputs inputs) {
         sim.update(0.02);
-        inputs.positionMeters = sim.getPositionMeters() * 2; // multiplied by 2 due to cascade rigging
+        inputs.positionMeters = sim.getPositionMeters();
         inputs.appliedVolts = appliedVolts;
         inputs.currentAmps = sim.getCurrentDrawAmps();
+        inputs.upperLimit = sim.hasHitUpperLimit();
+        inputs.lowerLimit = sim.hasHitLowerLimit();
     }
 
     @Override
