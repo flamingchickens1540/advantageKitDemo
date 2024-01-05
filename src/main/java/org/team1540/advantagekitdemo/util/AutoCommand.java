@@ -1,14 +1,12 @@
 package org.team1540.advantagekitdemo.util;
 
 import com.pathplanner.lib.commands.PathPlannerAuto;
-import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.path.PathPlannerPath;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import org.team1540.advantagekitdemo.commands.auto.PathPlannerDriveCommand;
 import org.team1540.advantagekitdemo.subsystems.drivetrain.Drivetrain;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 

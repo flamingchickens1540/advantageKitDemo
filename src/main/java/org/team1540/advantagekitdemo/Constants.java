@@ -40,7 +40,7 @@ public final class Constants {
 
         public static final double GEAR_RATIO = 6.0;
         public static final double WHEEL_DIAMETER_METERS = Units.inchesToMeters(4.0);
-        public static final double TRACK_WIDTH_METERS = 26.5;
+        public static final double TRACK_WIDTH_METERS = Units.inchesToMeters(26.5);
 
         public static final double ROBOT_MASS_KG = Units.lbsToKilograms(118); // omg its tem 118 teh robnots
         public static final double ROBOT_MOI = 2.54; // omg its tem 254 teh chezy pofs
