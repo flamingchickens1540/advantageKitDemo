@@ -45,11 +45,11 @@ public final class Constants {
         public static final double ROBOT_MASS_KG = Units.lbsToKilograms(118); // omg its tem 118 teh robnots
         public static final double ROBOT_MOI = 2.54; // omg its tem 254 teh chezy pofs
 
-        public static final double VELOCITY_KP = 3.2925;
+        public static final double VELOCITY_KP = 3.14;
         public static final double VELOCITY_KI = 0;
         public static final double VELOCITY_KD = 0;
 
-        public static final double KS = 0.650;
+        public static final double KS = 0;
         public static final double KV = 2.81;
         public static final double KA = 0.224;
 

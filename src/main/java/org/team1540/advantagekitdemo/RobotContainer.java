@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import org.team1540.advantagekitdemo.commands.ArcadeDriveCommand;
 import org.team1540.advantagekitdemo.commands.ElevatorSetpointCommand;
 import org.team1540.advantagekitdemo.commands.WristManualCommand;
+import org.team1540.advantagekitdemo.commands.auto.TestAuto;
 import org.team1540.advantagekitdemo.subsystems.drivetrain.Drivetrain;
 import org.team1540.advantagekitdemo.subsystems.drivetrain.DrivetrainIOReal;
 import org.team1540.advantagekitdemo.subsystems.drivetrain.DrivetrainIOSim;
@@ -82,6 +83,6 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
-        return new InstantCommand();
+        return new TestAuto(drivetrain);
     }
 }
