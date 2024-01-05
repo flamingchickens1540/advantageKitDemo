@@ -50,8 +50,10 @@ public class Drivetrain extends SubsystemBase {
         poseEstimator.update(getYaw(), getWheelPositions());
         if (isClosedLoop && closedLoopSetpoint != null) {
             setVoltage(
-                    velocityPID.calculate(getWheelSpeeds().leftMetersPerSecond, closedLoopSetpoint.leftMetersPerSecond),
+                    velocityPID.calculate(getWheelSpeeds().leftMetersPerSecond, closedLoopSetpoint.leftMetersPerSecond)
+                    + feedforward.calculate(closedLoopSetpoint.leftMetersPerSecond),
                     velocityPID.calculate(getWheelSpeeds().rightMetersPerSecond, closedLoopSetpoint.rightMetersPerSecond)
+                    + feedforward.calculate(closedLoopSetpoint.rightMetersPerSecond)
             );
         }
 
