@@ -21,6 +21,7 @@ import org.littletonrobotics.junction.Logger;
 import org.littletonrobotics.junction.networktables.NT4Publisher;
 import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
+import org.team1540.advantagekitdemo.util.SuperstructureVisualizer;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -99,6 +100,7 @@ public class Robot extends LoggedRobot {
         // This must be called from the robot's periodic block in order for anything in
         // the Command-based framework to work.
         CommandScheduler.getInstance().run();
+        SuperstructureVisualizer.periodic();
     }
 
     /**

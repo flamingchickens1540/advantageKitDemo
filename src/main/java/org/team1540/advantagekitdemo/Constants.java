@@ -41,6 +41,8 @@ public final class Constants {
         REPLAY
     }
 
+    public static final double DEADZONE_RADIUS = 0.1;
+
     public static final class DrivetrainConstants {
         public static final int FL_ID = 1;
         public static final int BL_ID = 2;
@@ -53,7 +55,7 @@ public final class Constants {
         public static final double WHEEL_DIAMETER_METERS = Units.inchesToMeters(4.0);
         public static final double TRACK_WIDTH_METERS = 26.5;
 
-        public static final double ROBOT_WEIGHT_KG = Units.lbsToKilograms(118); // omg its tem 118 teh robnots
+        public static final double ROBOT_MASS_KG = Units.lbsToKilograms(118); // omg its tem 118 teh robnots
         public static final double ROBOT_MOI = 2.54; // omg its tem 254 teh chezy pofs
 
         public static final double VELOCITY_KP = 3.2925;
@@ -79,10 +81,28 @@ public final class Constants {
         public static final double KP = 1;
         public static final double KI = 0;
         public static final double KD = 0;
-        public static final TrapezoidProfile.Constraints MOTION_CONSTRAINTS = new TrapezoidProfile.Constraints(2.5, 12.5);
+        public static final TrapezoidProfile.Constraints MOTION_CONSTRAINTS =
+                new TrapezoidProfile.Constraints(2.5, 12.5);
 
         public static final double KS = 0;
         public static final double KG = 0.38;
         public static final double KV = 0.19;
+    }
+
+    public static final class IntakeConstants {
+        public static final double WRIST_GEARING = 50;
+        public static final double INTAKE_LENGTH_METERS = Units.inchesToMeters(17);
+        public static final double INTAKE_MASS_KG = Units.lbsToKilograms(8);
+        public static final double INTAKE_MOI = INTAKE_MASS_KG * INTAKE_LENGTH_METERS * INTAKE_LENGTH_METERS / 3;
+
+        public static final double WRIST_KP = 1;
+        public static final double WRIST_KI = 0;
+        public static final double WRIST_KD = 0;
+        public static final TrapezoidProfile.Constraints MOTION_CONSTRAINTS =
+                new TrapezoidProfile.Constraints(1.8, 7.2);
+
+        public static final double WRIST_KS = 0;
+        public static final double WRIST_KG = 0.87;
+        public static final double WRIST_KV = 5.64;
     }
 }

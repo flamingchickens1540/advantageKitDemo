@@ -6,6 +6,7 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj2.command.ProfiledPIDSubsystem;
 import org.littletonrobotics.junction.Logger;
+import org.team1540.advantagekitdemo.util.SuperstructureVisualizer;
 
 import static org.team1540.advantagekitdemo.Constants.ElevatorConstants.*;
 
@@ -25,6 +26,8 @@ public class Elevator extends ProfiledPIDSubsystem {
         super.periodic();
         io.updateInputs(inputs);
         Logger.processInputs("Elevator", inputs);
+
+        SuperstructureVisualizer.setElevatorPosition(getPositionMeters());
     }
 
     public void setPercent(double percentOutput) {
@@ -42,8 +45,7 @@ public class Elevator extends ProfiledPIDSubsystem {
     }
 
     public void stop() {
-        if (RobotState.isDisabled()) setVoltage(0);
-        else setPosition(getPositionMeters());
+        setPercent(0);
     }
 
     public double getPositionMeters() {

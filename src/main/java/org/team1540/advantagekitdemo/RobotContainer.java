@@ -18,9 +18,18 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import org.team1540.advantagekitdemo.commands.ArcadeDriveCommand;
+import org.team1540.advantagekitdemo.commands.ElevatorManualCommand;
+import org.team1540.advantagekitdemo.commands.WristManualCommand;
 import org.team1540.advantagekitdemo.subsystems.drivetrain.Drivetrain;
 import org.team1540.advantagekitdemo.subsystems.drivetrain.DrivetrainIOReal;
 import org.team1540.advantagekitdemo.subsystems.drivetrain.DrivetrainIOSim;
+import org.team1540.advantagekitdemo.subsystems.elevator.Elevator;
+import org.team1540.advantagekitdemo.subsystems.elevator.ElevatorIO;
+import org.team1540.advantagekitdemo.subsystems.elevator.ElevatorIOSim;
+import org.team1540.advantagekitdemo.subsystems.intake.Intake;
+import org.team1540.advantagekitdemo.subsystems.intake.IntakeIO;
+import org.team1540.advantagekitdemo.subsystems.intake.IntakeIOSim;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -30,9 +39,12 @@ import org.team1540.advantagekitdemo.subsystems.drivetrain.DrivetrainIOSim;
  */
 public class RobotContainer {
     // Controller
-    private final CommandXboxController controller = new CommandXboxController(0);
+    private final CommandXboxController driver = new CommandXboxController(0);
+    private final CommandXboxController copilot = new CommandXboxController(1);
 
     final Drivetrain drivetrain;
+    final Elevator elevator;
+    final Intake intake;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -40,8 +52,12 @@ public class RobotContainer {
     public RobotContainer() {
         if (Robot.isReal()) {
             drivetrain = new Drivetrain(new DrivetrainIOReal());
+            elevator = new Elevator(new ElevatorIO() {});
+            intake = new Intake(new IntakeIO() {});
         } else {
             drivetrain = new Drivetrain(new DrivetrainIOSim());
+            elevator = new Elevator(new ElevatorIOSim());
+            intake = new Intake(new IntakeIOSim());
         }
         configureButtonBindings();
     }
@@ -53,6 +69,9 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
+        drivetrain.setDefaultCommand(new ArcadeDriveCommand(drivetrain, driver));
+        elevator.setDefaultCommand(new ElevatorManualCommand(elevator, copilot));
+        intake.setDefaultCommand(new WristManualCommand(intake, copilot));
     }
 
     /**

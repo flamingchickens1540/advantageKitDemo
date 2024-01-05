@@ -12,7 +12,7 @@ public class DrivetrainIOSim implements DrivetrainIO {
                     DCMotor.getFalcon500(2),
                     GEAR_RATIO,
                     ROBOT_MOI,
-                    ROBOT_WEIGHT_KG,
+                    ROBOT_MASS_KG,
                     WHEEL_DIAMETER_METERS / 2,
                     TRACK_WIDTH_METERS,
                     null

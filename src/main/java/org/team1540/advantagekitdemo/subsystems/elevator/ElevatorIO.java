@@ -3,8 +3,6 @@ package org.team1540.advantagekitdemo.subsystems.elevator;
 import org.littletonrobotics.junction.AutoLog;
 
 public interface ElevatorIO {
-
-
     @AutoLog
     class ElevatorIOInputs {
         public double positionMeters = 0;
