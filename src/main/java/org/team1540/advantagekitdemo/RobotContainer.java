@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import org.team1540.advantagekitdemo.commands.ArcadeDriveCommand;
-import org.team1540.advantagekitdemo.commands.ElevatorManualCommand;
+import org.team1540.advantagekitdemo.commands.ElevatorSetpointCommand;
 import org.team1540.advantagekitdemo.commands.WristManualCommand;
 import org.team1540.advantagekitdemo.subsystems.drivetrain.Drivetrain;
 import org.team1540.advantagekitdemo.subsystems.drivetrain.DrivetrainIOReal;
@@ -70,8 +70,10 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         drivetrain.setDefaultCommand(new ArcadeDriveCommand(drivetrain, driver));
-        elevator.setDefaultCommand(new ElevatorManualCommand(elevator, copilot));
         intake.setDefaultCommand(new WristManualCommand(intake, copilot));
+
+        copilot.rightBumper().onTrue(new ElevatorSetpointCommand(elevator, 1.5));
+        copilot.leftBumper().onTrue(new ElevatorSetpointCommand(elevator, 0));
     }
 
     /**

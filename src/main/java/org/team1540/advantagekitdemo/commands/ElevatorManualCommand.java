@@ -2,6 +2,7 @@ package org.team1540.advantagekitdemo.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+
 import org.team1540.advantagekitdemo.subsystems.elevator.Elevator;
 
 public class ElevatorManualCommand extends Command {
@@ -16,7 +17,8 @@ public class ElevatorManualCommand extends Command {
 
     @Override
     public void execute() {
-        elevator.setPercent(controller.getRightTriggerAxis() - controller.getLeftTriggerAxis());
+        double controllerInput = controller.getRightTriggerAxis() - controller.getLeftTriggerAxis();
+        elevator.setPercent(controllerInput);
     }
 
     @Override

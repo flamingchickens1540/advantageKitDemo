@@ -61,11 +61,11 @@ public final class Constants {
     public static final class ElevatorConstants {
         public static final double GEAR_RATIO = 4.21;
         public static final double DRUM_RADIUS_METERS = Units.inchesToMeters(0.75);
-        public static final double MAX_HEIGHT_METERS = Units.inchesToMeters(70);
+        public static final double MAX_HEIGHT_METERS = Units.inchesToMeters(80);
         public static final double STAGE_1_HEIGHT_METERS = Units.inchesToMeters(38);
         public static final double CARRIAGE_MASS_KG = 20;
 
-        public static final double KP = 1;
+        public static final double KP = 36;
         public static final double KI = 0;
         public static final double KD = 0;
         public static final TrapezoidProfile.Constraints MOTION_CONSTRAINTS =
@@ -89,7 +89,7 @@ public final class Constants {
                 new TrapezoidProfile.Constraints(1.8, 7.2);
 
         public static final double WRIST_KS = 0;
-        public static final double WRIST_KG = 0.87;
-        public static final double WRIST_KV = 5.64;
+        public static final double WRIST_KG = 0.27;
+        public static final double WRIST_KV = 0.90;
     }
 }

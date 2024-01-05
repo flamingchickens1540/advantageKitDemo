@@ -45,7 +45,8 @@ public class Elevator extends ProfiledPIDSubsystem {
     }
 
     public void stop() {
-        setPercent(0);
+        if (RobotState.isDisabled()) setPercent(0);
+        else setPosition(getPositionMeters());
     }
 
     public double getPositionMeters() {
