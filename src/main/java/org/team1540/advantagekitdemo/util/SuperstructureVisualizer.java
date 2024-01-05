@@ -35,9 +35,9 @@ public class SuperstructureVisualizer {
 
     public static void setWristPosition(Rotation2d wristPosition) {
         wrist = new Pose3d(
+                0.0 + 0.228600,
                 0.0,
-                0.0,
-                elevatorPosition,
+                elevatorPosition + 0.193675,
                 new Rotation3d(0, wristPosition.getRadians(), 0)
         );
     }
