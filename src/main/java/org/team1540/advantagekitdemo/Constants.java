@@ -30,6 +30,10 @@ public final class Constants {
 
     public static final double DEADZONE_RADIUS = 0.1;
 
+    public static final class SimConstants {
+        public static final double OFFSET_METERS = 0.022225;
+    }
+
     public static final class DrivetrainConstants {
         public static final int FL_ID = 1;
         public static final int BL_ID = 2;
@@ -59,6 +63,9 @@ public final class Constants {
     }
 
     public static final class ElevatorConstants {
+        public static final int LEADER_ID = 5;
+        public static final int FOLLOWER_ID = 6;
+
         public static final double GEAR_RATIO = 4.21;
         public static final double DRUM_RADIUS_METERS = Units.inchesToMeters(0.75);
         public static final double MAX_HEIGHT_METERS = Units.inchesToMeters(80);
@@ -82,7 +89,7 @@ public final class Constants {
         public static final double INTAKE_MASS_KG = Units.lbsToKilograms(8);
         public static final double INTAKE_MOI = INTAKE_MASS_KG * INTAKE_LENGTH_METERS * INTAKE_LENGTH_METERS / 3;
 
-        public static final double WRIST_KP = 1;
+        public static final double WRIST_KP = 50;
         public static final double WRIST_KI = 0;
         public static final double WRIST_KD = 0;
         public static final TrapezoidProfile.Constraints MOTION_CONSTRAINTS =
