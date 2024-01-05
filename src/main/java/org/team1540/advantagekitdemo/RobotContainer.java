@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import org.team1540.advantagekitdemo.commands.ArcadeDriveCommand;
+import org.team1540.advantagekitdemo.commands.ElevatorManualCommand;
 import org.team1540.advantagekitdemo.commands.ElevatorSetpointCommand;
 import org.team1540.advantagekitdemo.commands.WristManualCommand;
 import org.team1540.advantagekitdemo.commands.auto.TestAuto;
@@ -31,6 +32,7 @@ import org.team1540.advantagekitdemo.subsystems.elevator.ElevatorIOSim;
 import org.team1540.advantagekitdemo.subsystems.intake.Intake;
 import org.team1540.advantagekitdemo.subsystems.intake.IntakeIO;
 import org.team1540.advantagekitdemo.subsystems.intake.IntakeIOSim;
+import org.team1540.advantagekitdemo.subsystems.climber.*;;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -46,6 +48,7 @@ public class RobotContainer {
     final Drivetrain drivetrain;
     final Elevator elevator;
     final Intake intake;
+    final Climber climber;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -55,10 +58,12 @@ public class RobotContainer {
             drivetrain = new Drivetrain(new DrivetrainIOReal());
             elevator = new Elevator(new ElevatorIO() {});
             intake = new Intake(new IntakeIO() {});
+            climber = new Climber(new ClimberIO() {});
         } else {
             drivetrain = new Drivetrain(new DrivetrainIOSim());
             elevator = new Elevator(new ElevatorIOSim());
             intake = new Intake(new IntakeIOSim());
+            climber = new Climber(new ClimberIOSim());
         }
         configureButtonBindings();
     }
@@ -72,9 +77,15 @@ public class RobotContainer {
     private void configureButtonBindings() {
         drivetrain.setDefaultCommand(new ArcadeDriveCommand(drivetrain, driver));
         intake.setDefaultCommand(new WristManualCommand(intake, copilot));
+        elevator.setDefaultCommand(new ElevatorManualCommand(elevator, copilot));
 
         copilot.rightBumper().onTrue(new ElevatorSetpointCommand(elevator, 1.5));
         copilot.leftBumper().onTrue(new ElevatorSetpointCommand(elevator, 0));
+
+        driver.leftBumper().onTrue(new InstantCommand(() -> climber.setForksStowed(!climber.getForksStowed())));
+        driver.rightBumper().onTrue(new InstantCommand(() -> climber.setHangerStowed(!climber.getHangerStowed())));
+        driver.a().onTrue(new InstantCommand(() -> climber.setForksStowed(!climber.getForksStowed())));
+        driver.b().onTrue(new InstantCommand(() -> climber.setHangerStowed(!climber.getHangerStowed())));
     }
 
     /**
