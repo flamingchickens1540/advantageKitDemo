@@ -20,16 +20,17 @@ public class Climber extends SubsystemBase {
     }
 
     public void setHangerStowed(boolean hangerStowed){
-        io.setPosition(hangerStowed, getForksStowed());
+        io.setHanger(hangerStowed);
     }
 
     public void setForksStowed(boolean forksStowed){
-        io.setPosition(getHangerStowed(), forksStowed);
+        io.setForks(forksStowed);
     }
 
     public boolean getHangerStowed(){
         return inputs.hangerStowed;
     }
+
     public boolean getForksStowed(){
         return inputs.forksStowed;
     }

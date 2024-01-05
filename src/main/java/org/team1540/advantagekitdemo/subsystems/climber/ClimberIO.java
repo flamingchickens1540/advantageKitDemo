@@ -11,5 +11,7 @@ public interface ClimberIO {
 
 
     default void updateInputs(ClimberIOInputs inputs) {}
-    default void setPosition(boolean hangerStowed, boolean forksStowed){}
+
+    default void setForks(boolean stowed) {}
+    default void setHanger(boolean stowed) {}
 }

@@ -54,11 +54,16 @@ public class Intake extends ProfiledPIDSubsystem {
     }
 
     public void stopWrist() {
-        setWristPercent(0);
+        if (RobotState.isDisabled()) setWristPercent(0);
+        else setWristPosition(getWristPosition());
     }
 
     public Rotation2d getWristPosition() {
         return inputs.wristPosition;
+    }
+
+    public double getProfilePosition() {
+        return getController().getSetpoint().position;
     }
 
     @Override

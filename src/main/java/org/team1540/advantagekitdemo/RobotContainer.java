@@ -13,21 +13,20 @@
 
 package org.team1540.advantagekitdemo;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import org.team1540.advantagekitdemo.commands.ArcadeDriveCommand;
-import org.team1540.advantagekitdemo.commands.ElevatorManualCommand;
-import org.team1540.advantagekitdemo.commands.ElevatorSetpointCommand;
-import org.team1540.advantagekitdemo.commands.WristManualCommand;
+import org.team1540.advantagekitdemo.commands.*;
 import org.team1540.advantagekitdemo.commands.auto.TestAuto;
 import org.team1540.advantagekitdemo.subsystems.drivetrain.Drivetrain;
 import org.team1540.advantagekitdemo.subsystems.drivetrain.DrivetrainIOReal;
 import org.team1540.advantagekitdemo.subsystems.drivetrain.DrivetrainIOSim;
 import org.team1540.advantagekitdemo.subsystems.elevator.Elevator;
-import org.team1540.advantagekitdemo.subsystems.elevator.ElevatorIO;
+import org.team1540.advantagekitdemo.subsystems.elevator.ElevatorIOReal;
 import org.team1540.advantagekitdemo.subsystems.elevator.ElevatorIOSim;
 import org.team1540.advantagekitdemo.subsystems.intake.Intake;
 import org.team1540.advantagekitdemo.subsystems.intake.IntakeIO;
@@ -56,7 +55,7 @@ public class RobotContainer {
     public RobotContainer() {
         if (Robot.isReal()) {
             drivetrain = new Drivetrain(new DrivetrainIOReal());
-            elevator = new Elevator(new ElevatorIO() {});
+            elevator = new Elevator(new ElevatorIOReal());
             intake = new Intake(new IntakeIO() {});
             climber = new Climber(new ClimberIO() {});
         } else {
@@ -76,8 +75,8 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         drivetrain.setDefaultCommand(new ArcadeDriveCommand(drivetrain, driver));
-        intake.setDefaultCommand(new WristManualCommand(intake, copilot));
-        elevator.setDefaultCommand(new ElevatorManualCommand(elevator, copilot));
+//        intake.setDefaultCommand(new WristManualCommand(intake, copilot));
+//        elevator.setDefaultCommand(new ElevatorManualCommand(elevator, copilot));
 
         copilot.rightBumper().onTrue(new ElevatorSetpointCommand(elevator, 1.5));
         copilot.leftBumper().onTrue(new ElevatorSetpointCommand(elevator, 0));
@@ -94,6 +93,14 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
-        return new TestAuto(drivetrain);
+        return Commands.parallel(
+                new TestAuto(drivetrain),
+                new IntakeCommand(intake, Rotation2d.fromDegrees(180), 0),
+                new ElevatorSetpointCommand(elevator, 1.8)
+        ).andThen(new InstantCommand(() -> {
+            System.out.println("setting climbers");
+            climber.setForksStowed(false);
+            climber.setHangerStowed(false);
+        }));
     }
 }
