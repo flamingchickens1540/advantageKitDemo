@@ -25,7 +25,7 @@ public class IntakeIOSim implements IntakeIO {
     @Override
     public void updateInputs(IntakeIOInputs inputs) {
         wristSim.update(0.02);
-        inputs.wristPosition = Rotation2d.fromDegrees(wristSim.getAngleRads());
+        inputs.wristPosition = Rotation2d.fromRadians(wristSim.getAngleRads());
         inputs.wristAppliedVolts = wristVoltage;
         inputs.wristCurrentAmps = wristSim.getCurrentDrawAmps();
         inputs.intakeAppliedVolts = intakeVoltage;

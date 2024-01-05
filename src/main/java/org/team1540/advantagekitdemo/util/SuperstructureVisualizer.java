@@ -20,26 +20,25 @@ public class SuperstructureVisualizer {
     public static void setElevatorPosition(double positionMeters) {
         if (positionMeters <= ElevatorConstants.STAGE_1_HEIGHT_METERS) {
             elevatorStage1 = new Pose3d();
-            elevatorCarriage = new Pose3d(0.0, positionMeters, 0.0, new Rotation3d());
         } else {
-            elevatorCarriage = new Pose3d(0.0, ElevatorConstants.STAGE_1_HEIGHT_METERS, 0.0, new Rotation3d());
             elevatorStage1 =
                     new Pose3d(
                             0.0,
-                            positionMeters - ElevatorConstants.STAGE_1_HEIGHT_METERS,
                             0.0,
+                            positionMeters - ElevatorConstants.STAGE_1_HEIGHT_METERS,
                             new Rotation3d()
                     );
         }
+        elevatorCarriage = new Pose3d(0.0, 0.0, positionMeters, new Rotation3d());
         elevatorPosition = positionMeters;
     }
 
     public static void setWristPosition(Rotation2d wristPosition) {
         wrist = new Pose3d(
                 0.0,
-                elevatorPosition,
                 0.0,
-                new Rotation3d(0, wristPosition.getDegrees(), 0)
+                elevatorPosition,
+                new Rotation3d(0, wristPosition.getRadians(), 0)
         );
     }
 }
